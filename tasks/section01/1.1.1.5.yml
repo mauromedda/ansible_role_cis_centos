@@ -1,0 +1,58 @@
+---
+# 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled (Scored)
+
+- name: 1.1.1.5 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_5
+  tags:
+    - level1
+    - section01
+    - "1.1.1.5"
+    - scored
+
+- name: 1.1.1.5 - Check if hfsplus is disabled
+  command: modprobe -n -v hfsplus
+  register: mod_hfsplus
+  changed_when: mod_hfsplus.stdout | search('hfsplus')
+  check_mode: false
+  failed_when: mod_hfsplus.rc not in (0,1)
+  tags:
+    - level1
+    - section01
+    - "1.1.1.5"
+    - scored
+
+- name: 1.1.1.5 - Check if hfsplus is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - section01
+    - "1.1.1.5"
+    - scored
+  changed_when: lsmod.stdout | search('hfsplus')
+
+- name: 1.1.1.5 - Unload hfsplus if required
+  command: modprobe -r hfsplus
+  register: mod_hfsplus_remove
+  changed_when: mod_hfsplus_remove.rc == 0
+  when: lsmod.stdout | search('hfsplus.*')
+  tags:
+    - level1
+    - section01
+    - "1.1.1.5"
+    - scored
+
+- name: 1.1.1.5 - Ensure mounting of hfsplus filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install hfsplus" 
+    line: "install hfsplus /bin/true" 
+  when: modprobe_1_1_1_5.stat.exists is defined and modprobe_1_1_1_5.stat.exists
+  tags:
+    - level1
+    - section01
+    - "1.1.1.5"
+    - scored

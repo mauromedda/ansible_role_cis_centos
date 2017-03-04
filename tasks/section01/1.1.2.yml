@@ -1,0 +1,16 @@
+---
+# 1.1.2 Ensure separate partition exists for /tmp (Scored)
+
+- name: 1.1.2 Ensure separate partition exists for /tmp (Scored)
+  systemd:
+    name: tmp.mount
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    state: started
+  tags:
+    - level2
+    - section01
+    - section01_level2
+    - "1.1.2"
+    - scored

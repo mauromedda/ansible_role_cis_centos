@@ -1,0 +1,58 @@
+---
+# 1.1.1.4 Ensure mounting of hfs filesystems is disabled (Scored)
+
+- name: 1.1.1.4 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_4
+  tags:
+    - level1
+    - section01
+    - "1.1.1.4"
+    - scored
+
+- name: 1.1.1.4 - Check if hfs is disabled
+  command: modprobe -n -v hfs
+  register: mod_hfs
+  changed_when: mod_hfs.stdout | search('hfs')
+  check_mode: false
+  failed_when: mod_hfs.rc not in (0,1)
+  tags:
+    - level1
+    - section01
+    - "1.1.1.4"
+    - scored
+
+- name: 1.1.1.4 - Check if hfs is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - section01
+    - "1.1.1.4"
+    - scored
+  changed_when: lsmod.stdout | search('hfs')
+
+- name: 1.1.1.4 - Unload hfs if required
+  command: modprobe -r hfs
+  register: mod_hfs_remove
+  changed_when: mod_hfs_remove.rc == 0
+  when: lsmod.stdout | search('hfs.*')
+  tags:
+    - level1
+    - section01
+    - "1.1.1.4"
+    - scored
+
+- name: 1.1.1.4 - Ensure mounting of hfs filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install hfs\\s+" 
+    line: "install hfs /bin/true" 
+  when: modprobe_1_1_1_4.stat.exists is defined and modprobe_1_1_1_4.stat.exists
+  tags:
+    - level1
+    - section01
+    - "1.1.1.4"
+    - scored

@@ -1,0 +1,14 @@
+---
+# tasks file for ansible_role_cis_centos
+
+- include: preflight.yml
+  when: cis_apply_level_1_profile or cis_apply_level_2_profile
+  tags: always
+
+- include: "section01.yml"
+  become: yes
+  when: cis_section01
+
+- include: "section02.yml"
+  become: yes
+  when: cis_section02
