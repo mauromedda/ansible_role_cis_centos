@@ -16,12 +16,13 @@
     - "1.5.1"
 
 - name: 1.5.1 Ensure core dumps are restricted sysctl (Scored)
-  template:
-    src: etc/sysctl.d/CIS-systemctl.conf.j2
-    dest: /etc/sysctl.d/CIS-systemctl.conf
-    owner: root
-    group: root
-    mode: 0644
+  sysctl:
+    name: fs.suid_dumpable
+    value: 0
+    state: present
+    reload: yes
+    sysctl_set: yes
+    ignoreerrors: yes
   tags:
     - level1
     - section01
