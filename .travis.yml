@@ -24,20 +24,5 @@ script:
   # Ansible syntax check.
   - 'docker exec --tty "$(cat ${container_id})" bash -c "cd /srv/ansible/${repoName}/tests && ansible-playbook test.yml --syntax-check"'
 
-  # Test role.
-  - 'docker exec --tty "$(cat ${container_id})" bash -c "cd /srv/ansible/${repoName}/tests && ansible-playbook test.yml"'
-
-  # Test role idempotence.
-  - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" bash -c "cd /srv/ansible/${repoName}/tests && ansible-playbook test.yml" | tee -a ${idempotence}
-  - >
-    tail ${idempotence}
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-
-  # Ensure python is installed
-  - 'docker exec -td "$(cat ${container_id})" bash -c "which django-admin"'
-
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
