@@ -1,5 +1,5 @@
 ---
-# tasks file for ansible_role_cis_centos
+# tasks file for ansible_role_ansible_role_cis_centos
 
 - include: preflight.yml
   when: cis_apply_level_1_profile or cis_apply_level_2_profile

@@ -1,5 +1,5 @@
 ---
-# handlers file for ansible_role_cis_centos
+# handlers file for ansible_role_ansible_role_cis_centos
 
 - name: restart tmp.mount
   become: yes

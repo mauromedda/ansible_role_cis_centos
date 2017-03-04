@@ -3,4 +3,4 @@
   connection: local
   become: true
   roles:
-    - ansible_role_cis_centos
+    - ansible_role_ansible_role_cis_centos
