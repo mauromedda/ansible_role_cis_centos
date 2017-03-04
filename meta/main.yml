@@ -12,6 +12,6 @@ galaxy_info:
     versions:
     - 7
 
-galaxy_tags: [ "CentOS", "CIS", "Security" ]
+  galaxy_tags: [ "CentOS", "CIS", "Security" ]
 
-dependencies: []
+  dependencies: []
