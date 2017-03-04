@@ -67,3 +67,6 @@
 - include: section01/1.1.15.yml
   when: "'1.1.15' not in cis_level_1_exclusions"
 
+- include: section01/1.1.21.yml
+  when: "'1.1.21' not in cis_level_1_exclusions"
+

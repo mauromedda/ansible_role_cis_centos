@@ -1,0 +1,18 @@
+---
+# 1.1.14 Ensure nodev option set on /home partition (Scored)
+
+- name: 1.1.14 Ensure nodev option set on /home partition (Scored)
+  mount:
+    name: "{{ item.mount }}"
+    state: mounted
+    fstype: "{{ item.fstype }}"
+    src: "{{ item.device }}"
+    opts: "{{ item.options.split(',') | union(['nodev']) | join(',') }}"
+  when: item.mount == '/var/tmp'
+  with_items: "{{ ansible_mounts }}"
+  tags:
+    - level1
+    - section01
+    - section01_level1
+    - "1.1.14"
+    - scored
