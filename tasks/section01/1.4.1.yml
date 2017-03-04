@@ -1,0 +1,26 @@
+---
+# 1.4.1 Ensure permissions on bootloader config are configured (Scored)
+
+- name: 1.4.1 Check if grub2 exists (Scored)
+  stat:
+    path: /etc/grub2/grub2.conf
+  register: grub2_st
+  tags:
+    - level1
+    - section01
+    - section01_level1
+    - "1.4.1"
+
+- name: 1.4.1 Ensure permissions on bootloader config are configured (Scored)
+  file:
+    path: /etc/grub2/grub2.conf
+    mode: 0600
+    owner: root
+    group: root
+  when: grub2_st.stat.exists
+  tags:
+    - level1
+    - section01
+    - section01_level1
+    - "1.4.1"
+    - scored
