@@ -1,0 +1,22 @@
+---
+# 1.1.13 Ensure separate partition exists for /home (Scored)
+- name: 1.1.13 Ensure separate partition exists for /home (Scored)
+  shell: mount | grep /dev
+  register: home_mount
+  changed_when: false
+  check_mode: false
+  tags:
+    - section01
+    - level2
+    - section01_level2
+    - "1.1.13"
+
+- name: 1.1.13 Ensure separate partition exists for /home (Scored)
+  debug: msg="***Manually create separete /home partition"
+  when: "home_mount.stdout and '/home' not in home_mount.stdout"
+  tags:
+    - section01
+    - level2
+    - section01_level2
+    - "1.1.13"
+

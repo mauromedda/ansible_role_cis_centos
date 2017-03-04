@@ -1,0 +1,22 @@
+---
+# 1.1.12 Ensure separate partition exists for /var/log/audit (Scored)
+- name: 1.1.12 Ensure separate partition exists for /var/log/audit (Scored)
+  shell: mount | grep /dev
+  register: var_mount
+  changed_when: false
+  check_mode: false
+  tags:
+    - section01
+    - level2
+    - section01_level2
+    - "1.1.12"
+
+- name: 1.1.12 Ensure separate partition exists for /var/log/audit (Scored)
+  debug: msg="***Manually create separete /var/log/audit partition"
+  when: "var_mount.stdout and '/var/log/audit' not in var_mount.stdout"
+  tags:
+    - section01
+    - level2
+    - section01_level2
+    - "1.1.12"
+
