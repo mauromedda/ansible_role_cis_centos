@@ -1,0 +1,30 @@
+---
+# 1.5.1 Ensure core dumps are restricted (Scored)
+
+- name: 1.5.1 Ensure core dumps are restricted limits (Scored)
+  template:
+    src: etc/security/limits.d/CIS-limits.conf.j2
+    dest: /etc/security/limits.d/CIS-limits.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - level1
+    - section01
+    - section01_level1
+    - scored
+    - "1.5.1"
+
+- name: 1.5.1 Ensure core dumps are restricted sysctl (Scored)
+  template:
+    src: etc/sysctl.d/CIS-systemctl.conf.j2
+    dest: /etc/sysctl.d/CIS-systemctl.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - level1
+    - section01
+    - section01_level1
+    - scored
+    - "1.5.1"
