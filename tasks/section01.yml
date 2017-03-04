@@ -61,3 +61,9 @@
 - include: section01/1.1.13.yml
   when: "'1.1.13' not in cis_level_1_exclusions and cis_apply_level_2_profile"
 
+- include: section01/1.1.14.yml
+  when: "'1.1.14' not in cis_level_1_exclusions"
+
+- include: section01/1.1.15.yml
+  when: "'1.1.15' not in cis_level_1_exclusions"
+
