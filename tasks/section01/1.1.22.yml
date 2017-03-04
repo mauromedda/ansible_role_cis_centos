@@ -1,0 +1,15 @@
+---
+# 1.1.22 Disable Automounting (Scored)
+
+- name: 1.1.22 Disable Automounting (Scored)
+  systemd:
+    name: autofs
+    state: stopped
+    enabled: false
+  when: autofs_service_status.stdout == "loaded"
+  tags:
+    - section01
+    - level1
+    - section01_level1
+    - "1.1.22"
+    

@@ -1,0 +1,31 @@
+---
+# 1.2.2 Ensure GPG keys are configured (Not Scored)
+# 1.2.3 Ensure gpgcheck is globally activated (Scored)
+
+
+- name: "1.2.2 Ensure GPG keys are configured (Not Scored)\n
+         1.2.3 Ensure gpgcheck is globally activated (Scored)"
+  replace:
+    name: /etc/yum.conf
+    regexp: "^gpgcheck=0"
+    replace: "gpgcheck=1"
+  tags:
+    - section01
+    - level1
+    - section01_level1
+    - "1.2.2"
+    - "1.2.3"
+
+- name: "1.2.2 Ensure GPG keys are configured (Not Scored)\n
+         1.2.3 Ensure gpgcheck is globally activated (Scored)"
+  replace:
+    name: "{{ item }}"
+    regexp: "^gpgcheck=0"
+    replace: "gpgcheck=1"
+  with_fileglob: /etc/yum.repos.d/*.repo
+  tags:
+    - section01
+    - level1
+    - section01_level1
+    - "1.2.2`"
+    - "1.2.3`"

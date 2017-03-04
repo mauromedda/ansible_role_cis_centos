@@ -70,3 +70,12 @@
 - include: section01/1.1.21.yml
   when: "'1.1.21' not in cis_level_1_exclusions"
 
+- include: section01/1.1.22.yml
+  when: "'1.1.22' not in cis_level_1_exclusions"
+
+- include: section01/1.2.1.yml
+  when: "'1.2.1' not in cis_level_1_exclusions"
+
+- include: section01/1.2.2.yml
+  when: "'1.2.2' not in cis_level_1_exclusions"
+
