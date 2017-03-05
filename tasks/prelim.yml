@@ -1,5 +1,5 @@
 ---
-- name: "PRELIM | Check for autofs service"
+- name: "Check for autofs service"
   shell: "systemctl show autofs | grep LoadState | cut -d = -f 2"
   register: autofs_service_status
   changed_when: no

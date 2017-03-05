@@ -7,12 +7,12 @@
 cis_apply_level_1_profile: true    # Whether Level 1 of the benchmark should be applied
 cis_apply_level_2_profile: true    # Whether Level 2 of the benchmark should be applied
 
-cis_section01: true
-cis_section02: true
-cis_section03: true
-cis_section04: true
-cis_section05: true
-cis_section06: true
+cis_section01: true                #  Whether Section01 of the benchmark should be applied
+cis_section02: true                #  Whether Section02 of the benchmark should be applied
+cis_section03: true                #  Whether Section03 of the benchmark should be applied
+cis_section04: true                #  Whether Section04 of the benchmark should be applied
+cis_section05: true                #  Whether Section05 of the benchmark should be applied
+cis_section06: true                #  Whether Section06 of the benchmark should be applied
 
 cis_level_1_exclusions: []         # A list of Level 1 recommendations to exclude (i.e. ['1.1.1.1'])
 cis_level_2_exclusions: []         # A list of Level 2 recommendations to exclude 
@@ -37,6 +37,12 @@ cis_aide_cron_hour: 5
 cis_aide_cron_dow: "*" # Day of week
 cis_aide_cron_dom: "*" # Day of month
 cis_aide_cron_month: "*"
+
+# 1.6.1.1
+cis_selinux_disabled: true
+
+# 1.6.1.2
+cis_selinux_policy: targeted
 
 # 1.7.1.2
 cis_local_login_warning_banner: "Authorized uses only. All activity may be monitored and reported.\n"

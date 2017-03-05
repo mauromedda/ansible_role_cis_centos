@@ -1,0 +1,24 @@
+---
+# 1.6.1.6 Ensure no unconfined daemons exist (Scored)
+
+- name: 1.6.1.6 Ensure no unconfined daemons exist (Scored)
+  shell: ps -eZ | egrep "initrc" | egrep -vw "tr|ps|egrep|bash|awk" | tr ':' ' ' | awk '{ print $NF }'
+  register: initrc
+  changed_when: initrc.stdout_lines
+  check_mode: false
+  tags:
+    - level2
+    - section01
+    - section01_level2
+    - scored
+    - "1.6.1.6"
+
+- name: 1.6.1.6 Manual check for no unconfined daemons required (Scored)
+  debug: msg="*** Manual check required ***"
+  when: initrc.stdout_lines
+  tags:
+    - level2
+    - section01
+    - section01_level2
+    - scored
+    - "1.6.1.6"

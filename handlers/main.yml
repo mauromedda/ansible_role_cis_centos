@@ -9,3 +9,6 @@
     enabled: yes
     masked: no
     state: reloaded
+
+- name: generate new grub config
+  shell: grub2-mkconfig > /boot/grub2/grub.cfg

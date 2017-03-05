@@ -1,0 +1,15 @@
+---
+# 1.6.1.2 Ensure the SELinux state is enforcing (Scored)
+
+- name: 1.6.1.2 Ensure the SELinux state is enforcing (Scored)
+  selinux:
+    conf: /etc/selinux/config
+    policy: "{{ cis_selinux_policy }}"
+    state: enforcing
+  when: not cis_selinux_disabled
+  tags:
+    - level2
+    - section01
+    - section01_level2
+    - scored
+    - "1.6.1.2"
