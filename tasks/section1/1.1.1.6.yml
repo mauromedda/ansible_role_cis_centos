@@ -1,0 +1,58 @@
+---
+# 1.1.1.6 Ensure mounting of squashfs filesystems is disabled (Scored)
+
+- name: 1.1.1.6 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_6
+  tags:
+    - level1
+    - section1
+    - "1.1.1.6"
+    - scored
+
+- name: 1.1.1.6 - Check if squashfs is disabled
+  command: modprobe -n -v squashfs
+  register: mod_squashfs
+  changed_when: mod_squashfs.stdout | search('squashfs')
+  check_mode: false
+  failed_when: mod_squashfs.rc not in (0,1)
+  tags:
+    - level1
+    - section1
+    - "1.1.1.6"
+    - scored
+
+- name: 1.1.1.6 - Check if squashfs is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - section1
+    - "1.1.1.6"
+    - scored
+  changed_when: lsmod.stdout | search('squashfs')
+
+- name: 1.1.1.6 - Unload squashfs if required
+  command: modprobe -r squashfs
+  register: mod_squashfs_remove
+  changed_when: mod_squashfs_remove.rc == 0
+  when: lsmod.stdout | search('squashfs.*')
+  tags:
+    - level1
+    - section1
+    - "1.1.1.6"
+    - scored
+
+- name: 1.1.1.6 - Ensure mounting of squashfs filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install squashfs" 
+    line: "install squashfs /bin/true" 
+  when: modprobe_1_1_1_6.stat.exists is defined and modprobe_1_1_1_6.stat.exists
+  tags:
+    - level1
+    - section1
+    - "1.1.1.6"
+    - scored

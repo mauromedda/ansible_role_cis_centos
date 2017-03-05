@@ -1,0 +1,68 @@
+---
+# 1.1.1.1 Ensure mounting of cramfs filesystems is disabled (Scored)
+
+- name: 1.1.1.1 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_1
+  tags:
+    - level1
+    - section1
+    - "1.1.1.1"
+    - scored
+
+- name: 1.1.1.1 - Check if cramfs is disabled
+  command: modprobe -n -v cramfs
+  register: mod_cramfs
+  check_mode: false
+  changed_when: mod_cramfs.stdout | search('cramfs')
+  tags:
+    - level1
+    - section1
+    - "1.1.1.1"
+    - scored
+
+- name: 1.1.1.1 - Check if cramfs is loaded
+  command: lsmod
+  register: lsmod
+  check_mode: false
+  tags:
+    - level1
+    - section1
+    - "1.1.1.1"
+    - scored
+  changed_when: lsmod.stdout | search('cramfs')
+
+- name: 1.1.1.1 - Unload cramfs if required
+  command: modprobe -r cramfs
+  register: mod_cramfs_remove
+  changed_when: mod_cramfs_remove.rc == 0
+  when: lsmod.stdout | search('cramfs.*')
+  tags:
+    - level1
+    - section1
+    - "1.1.1.1"
+    - scored
+
+- name: 1.1.1.1 - Create the CIS modprobe configuration file
+  copy:
+    dest: "{{ cis_modprobe_conf_filename }}"
+    content: "install cramfs /bin/true\n"
+  when: modprobe_1_1_1_1.stat.exists is not defined or not modprobe_1_1_1_1.stat.exists
+  tags:
+    - level1
+    - section1
+    - "1.1.1.1"
+    - scored
+
+- name: 1.1.1.1 - Ensure mounting of cramfs filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install cramfs" 
+    line: "install cramfs /bin/true" 
+  when: modprobe_1_1_1_1.stat.exists is defined and modprobe_1_1_1_1.stat.exists
+  tags:
+    - level1
+    - section1
+    - "1.1.1.1"
+    - scored

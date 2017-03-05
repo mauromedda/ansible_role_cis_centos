@@ -1,0 +1,18 @@
+---
+# 1.1.9 Ensure nosuid option set on /var/tmp partition (Scored)
+
+- name: 1.1.9 Ensure nosuid option set on /var/tmp partition (Scored)
+  mount:
+    name: "{{ item.mount }}"
+    state: mounted
+    fstype: "{{ item.fstype }}"
+    src: "{{ item.device }}"
+    opts: "{{ item.options.split(',') | union(['nosuid']) | join(',') }}"
+  when: item.mount == '/var/tmp'
+  with_items: "{{ ansible_mounts }}"
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - "1.1.9"
+    - scored

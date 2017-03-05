@@ -1,0 +1,11 @@
+---
+# 1.5.2 Ensure XD/NX support is enabled (Not Scored)
+
+- name: 1.5.2 Ensure XD/NX support is enabled (Not Scored)
+  command: /bin/true
+  changed_when: false
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - "1.5.2"

@@ -1,0 +1,24 @@
+---
+# 1.1.21 Ensure sticky bit is set on all world-writable directories (Scored)
+
+- name: "1.1.21 Audit all world-writable directories"
+  shell: df --local -P | awk '{ if (NR!=1) print $6 }' | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null
+  register: worldwritable
+  changed_when: false
+  check_mode: false
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - scored
+    - "1.1.21"
+  
+- name: "1.1.21 Ensure sticky bit is set on all world-writable directories (Scored)"
+  shell: df --local -P | awk '{ if (NR!=1) print $6 }' | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
+  when: worldwritable.stdout
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - "1.1.21"
+    - scored

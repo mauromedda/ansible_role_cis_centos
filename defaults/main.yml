@@ -7,12 +7,12 @@
 cis_apply_level_1_profile: true    # Whether Level 1 of the benchmark should be applied
 cis_apply_level_2_profile: true    # Whether Level 2 of the benchmark should be applied
 
-cis_section01: true                #  Whether Section01 of the benchmark should be applied
-cis_section02: true                #  Whether Section02 of the benchmark should be applied
-cis_section03: true                #  Whether Section03 of the benchmark should be applied
-cis_section04: true                #  Whether Section04 of the benchmark should be applied
-cis_section05: true                #  Whether Section05 of the benchmark should be applied
-cis_section06: true                #  Whether Section06 of the benchmark should be applied
+cis_section1: true                #  Whether Section01 of the benchmark should be applied
+cis_section2: true                #  Whether Section02 of the benchmark should be applied
+cis_section3: true                #  Whether Section03 of the benchmark should be applied
+cis_section4: true                #  Whether Section04 of the benchmark should be applied
+cis_section5: true                #  Whether Section05 of the benchmark should be applied
+cis_section6: true                #  Whether Section06 of the benchmark should be applied
 
 cis_level_1_exclusions: []         # A list of Level 1 recommendations to exclude (i.e. ['1.1.1.1'])
 cis_level_2_exclusions: []         # A list of Level 2 recommendations to exclude 

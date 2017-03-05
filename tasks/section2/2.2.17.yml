@@ -1,0 +1,42 @@
+---
+# 2.2.17 Ensure rsh server is not enabled (Scored)
+
+- name: 2.2.17 Ensure rsh server is not enabled (Scored) - rsh
+  systemd:
+    name: rsh.socket
+    state: stopped
+    enabled: no
+  when: rsh_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.2.17"
+
+- name: 2.2.17 Ensure rsh server is not enabled (Scored) - rlogin
+  systemd:
+    name: rlogin.socket
+    state: stopped
+    enabled: no
+  when: rlogin_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.2.17"
+
+- name: 2.2.17 Ensure rsh server is not enabled (Scored) - rexec
+  systemd:
+    name: rexec.socket
+    state: stopped
+    enabled: no
+  when: rexec_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.2.17"
+

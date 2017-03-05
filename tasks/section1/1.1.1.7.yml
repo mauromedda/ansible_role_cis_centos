@@ -1,0 +1,58 @@
+---
+# 1.1.1.7 Ensure mounting of udf filesystems is disabled (Scored)
+
+- name: 1.1.1.7 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_7
+  tags:
+    - level1
+    - section1
+    - "1.1.1.7"
+    - scored
+
+- name: 1.1.1.7 - Check if udf is disabled
+  command: modprobe -n -v udf
+  register: mod_udf
+  changed_when: mod_udf.stdout | search('udf')
+  check_mode: false
+  failed_when: mod_udf.rc not in (0,1)
+  tags:
+    - level1
+    - section1
+    - "1.1.1.7"
+    - scored
+
+- name: 1.1.1.7 - Check if udf is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - section1
+    - "1.1.1.7"
+    - scored
+  changed_when: lsmod.stdout | search('udf')
+
+- name: 1.1.1.7 - Unload udf if required
+  command: modprobe -r udf
+  register: mod_udf_remove
+  changed_when: mod_udf_remove.rc == 0
+  when: lsmod.stdout | search('udf.*')
+  tags:
+    - level1
+    - section1
+    - "1.1.1.7"
+    - scored
+
+- name: 1.1.1.7 - Ensure mounting of udf filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install udf" 
+    line: "install udf /bin/true" 
+  when: modprobe_1_1_1_7.stat.exists is defined and modprobe_1_1_1_7.stat.exists
+  tags:
+    - level1
+    - section1
+    - "1.1.1.7"
+    - scored

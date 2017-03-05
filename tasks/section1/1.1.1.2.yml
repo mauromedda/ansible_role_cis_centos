@@ -1,0 +1,59 @@
+---
+# 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled (Scored)
+
+- name: 1.1.1.2 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_2
+  tags:
+    - level1
+    - section1
+    - "1.1.1.2"
+    - scored
+
+- name: 1.1.1.2 - Check if freevxfs is disabled
+  command: modprobe -n -v freevxfs
+  register: mod_freevxfs
+  check_mode: false
+  changed_when: mod_freevxfs.stdout | search('freevxfs')
+  failed_when: mod_freevxfs.rc not in (0,1)
+  tags:
+    - level1
+    - section1
+    - "1.1.1.2"
+    - scored
+
+- name: 1.1.1.2 - Check if freevxfs is loaded
+  command: lsmod
+  register: lsmod
+  check_mode: false
+  tags:
+    - level1
+    - section1
+    - "1.1.1.2"
+    - scored
+  changed_when: lsmod.stdout | search('freevxfs')
+
+- name: 1.1.1.2 - Unload freevxfs if required
+  command: modprobe -r freevxfs
+  register: mod_freevxfs_remove
+  changed_when: mod_freevxfs_remove.rc == 0
+  when: lsmod.stdout | search('freevxfs.*')
+  tags:
+    - level1
+    - section1
+    - "1.1.1.2"
+    - scored
+
+
+- name: 1.1.1.2 - Ensure mounting of freevxfs filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install freevxfs" 
+    line: "install freevxfs /bin/true" 
+  when: modprobe_1_1_1_2.stat.exists is defined and modprobe_1_1_1_2.stat.exists
+  tags:
+    - level1
+    - section1
+    - "1.1.1.2"
+    - scored

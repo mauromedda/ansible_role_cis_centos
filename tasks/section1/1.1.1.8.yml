@@ -1,0 +1,58 @@
+---
+# 1.1.1.8 Ensure mounting of vfat filesystems is disabled (Scored)
+
+- name: 1.1.1.8 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_8
+  tags:
+    - level1
+    - section1
+    - "1.1.1.8"
+    - scored
+
+- name: 1.1.1.8 - Check if vfat is disabled
+  command: modprobe -n -v vfat
+  register: mod_vfat
+  changed_when: mod_vfat.stdout | search('vfat')
+  check_mode: false
+  failed_when: mod_vfat.rc not in (0,1)
+  tags:
+    - level1
+    - section1
+    - "1.1.1.8"
+    - scored
+
+- name: 1.1.1.8 - Check if vfat is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - section1
+    - "1.1.1.8"
+    - scored
+  changed_when: lsmod.stdout | search('vfat')
+
+- name: 1.1.1.8 - Unload vfat if required
+  command: modprobe -r vfat
+  register: mod_vfat_remove
+  changed_when: mod_vfat_remove.rc == 0
+  when: lsmod.stdout | search('vfat.*')
+  tags:
+    - level1
+    - section1
+    - "1.1.1.8"
+    - scored
+
+- name: 1.1.1.8 - Ensure mounting of vfat filesystems is disabled
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install vfat" 
+    line: "install vfat /bin/true" 
+  when: modprobe_1_1_1_8.stat.exists is defined and modprobe_1_1_1_8.stat.exists
+  tags:
+    - level1
+    - section1
+    - "1.1.1.8"
+    - scored

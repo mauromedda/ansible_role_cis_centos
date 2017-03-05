@@ -9,10 +9,10 @@
   tags:
     - always
 
-- include: "section01.yml"
+- include: "section1.yml"
   become: yes
-  when: cis_section01
+  when: cis_section1
 
-- include: "section02.yml"
+- include: "section2.yml"
   become: yes
-  when: cis_section02
+  when: cis_section2

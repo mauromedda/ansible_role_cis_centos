@@ -1,0 +1,18 @@
+---
+# 2.1.6 Ensure tftp server is not enabled (Scored)
+
+- name: 2.1.6 Ensure tftp server is not enabled (Scored)
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enable: false
+  with_items:
+    - tftp-dgram
+    - tftp-stream
+  when: tftp_service_status.changed
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.1.6"

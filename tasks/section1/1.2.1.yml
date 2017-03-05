@@ -1,0 +1,14 @@
+---
+# 1.2.1 Ensure package manager repositories are configured (Not Scored)
+
+# The remediation for this action is system-wide. We check just that
+#  yum repolist will exit without erros.
+
+- name: 1.2.1 Ensure package manager repositories are configured (Not Scored)
+  shell: yum repolist
+  changed_when: false
+  tags:
+    - section1
+    - level1
+    - section1_level1
+    - "1.2.1"

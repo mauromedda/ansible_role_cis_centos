@@ -1,0 +1,13 @@
+---
+# 1.5.4 Ensure prelink is disabled (Scored)
+
+- name: 1.5.4 Ensure prelink is disabled (Scored)
+  yum:
+    name: prelink
+    state: absent
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - scored
+    - "1.5.4"

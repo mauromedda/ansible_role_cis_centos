@@ -1,0 +1,18 @@
+---
+# 2.1.5 Ensure time services are not enabled (Scored)
+
+- name: 2.1.5 Ensure time services are not enabled (Scored)
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enable: false
+  with_items:
+    - time-dgram
+    - time-stream
+  when: time_service_status.changed
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.1.5"

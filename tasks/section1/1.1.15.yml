@@ -1,0 +1,20 @@
+---
+# 1.1.15 Ensure nodev option set on /dev/shm partition (Scored)
+# 1.1.16 Ensure nosuid option set on /dev/shm partition (Scored)
+# 1.1.17 Ensure noexec option set on /dev/shm partition (Scored)
+  
+- name: "1.1.15 Ensure nodev option set on /dev/shm partition (Scored)\n
+         1.1.16 Ensure nosuid option set on /dev/shm partition (Scored)\n
+         1.1.17 Ensure noexec option set on /dev/shm partition (Scored)"
+  mount:
+    name: "/dev/shm"
+    state: mounted
+    fstype: tmpfs
+    src: tmpfs
+    opts: nodev,nosuid,noexec
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - "1.1.15"
+    - scored

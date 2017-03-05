@@ -1,0 +1,13 @@
+---
+# 1.6.1.5 Ensure the MCS Translation Service (mcstrans) is not installed (Scored)
+
+- name: 1.6.1.5 Ensure the MCS Translation Service (mcstrans) is not installed (Scored)
+  yum:
+    name: mcstrans
+    state: absent
+  tags:
+    - level2
+    - section1
+    - section1_level2
+    - scored
+    - "1.6.1.5"

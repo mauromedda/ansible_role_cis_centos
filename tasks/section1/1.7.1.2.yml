@@ -1,0 +1,15 @@
+---
+# 1.7.1.2 Ensure local login warning banner is configured properly (Not Scored)
+
+- name: 1.7.1.2 Ensure local login warning banner is configured properly (Not Scored)
+  template:
+    src: etc/issue.j2
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - "1.7.1.2"

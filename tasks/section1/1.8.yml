@@ -1,0 +1,12 @@
+---
+# 1.8 Ensure updates, patches, and additional security software are installed (Not Scored)
+
+- name: 1.8 Ensure updates, patches, and additional security software are installed (Not Scored)
+  yum:
+    name: "*"
+    state: latest
+  tags:
+    - level1
+    - section1
+    - section1_level1
+    - "1.8"

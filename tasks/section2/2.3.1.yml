@@ -1,0 +1,14 @@
+---
+# 2.3.1 Ensure NIS Client is not installed (Scored)
+
+- name: 2.3.1 Ensure NIS Client is not installed (Scored)
+  yum:
+    name: ypbind
+    state: absent
+  when: cis_ypbind_required == false
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.3.1"

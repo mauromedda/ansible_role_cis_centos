@@ -1,0 +1,16 @@
+---
+# 2.2.2 Ensure X Window System is not installed (Scored)
+
+- name: 2.2.2 Ensure X Window System is not installed (Scored)
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "@X Window System"
+    - "xorg-x11*"
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.2.2"

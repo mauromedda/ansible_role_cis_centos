@@ -1,0 +1,18 @@
+---
+# 2.1.3 Ensure discard services are not enabled (Scored)
+
+- name: 2.1.3 Ensure discard services are not enabled (Scored)
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enable: false
+  with_items:
+    - discard-dgram
+    - discard-stream
+  when: discard_service_status.changed
+  tags:
+    - level1
+    - section2
+    - section2_level1
+    - scored
+    - "2.1.3"
