@@ -9,6 +9,7 @@
     - level1
     - section01
     - section01_level1
+    - scored
     - "1.4.1"
 
 - name: 1.4.1 Ensure permissions on bootloader config are configured (Scored)

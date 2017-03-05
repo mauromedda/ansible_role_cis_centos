@@ -10,6 +10,7 @@
     - level1
     - section01
     - section01_level1
+    - scored
     - "1.1.21"
   
 - name: "1.1.21 Ensure sticky bit is set on all world-writable directories (Scored)"

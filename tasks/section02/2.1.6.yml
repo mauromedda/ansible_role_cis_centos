@@ -1,0 +1,31 @@
+---
+# 2.1.6 Ensure tftp server is not enabled (Scored)
+
+- name: 2.1.6 Ensure tftp server is not enabled (Scored)
+  shell: chkconfig --list 2>/dev/null| grep tftp
+  register: chkcfg_svc
+  changed_when: chkcfg_svc.stdout and chkcfg_svc.rc == 0
+  failed_when: chkcfg_svc.rc not in (0, 1)
+  ignore_errors: true
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.1.6"
+
+- name: 2.1.6 Ensure tftp server is not enabled (Scored)
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enable: false
+  with_items:
+    - tftp-dgram
+    - tftp-stream
+  when: chkcfg_svc.changed
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.1.6"

@@ -1,0 +1,15 @@
+---
+# 2.1.7 Ensure xinetd is not enabled (Scored)
+
+- name: 2.1.7 Ensure xinetd is not enabled (Scored)
+  systemd:
+    name: xinetd
+    state: stopped
+    enabled: false
+  when: xinetd_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.1.7"

@@ -4,3 +4,9 @@
   register: autofs_service_status
   changed_when: no
   check_mode: no
+
+- name: "Check for xinetd service"
+  shell: "systemctl show xinetd | grep LoadState | cut -d = -f 2"
+  register: xinetd_service_status
+  changed_when: no
+  check_mode: no
