@@ -65,3 +65,5 @@ Author
 ------
 
 Mauro Medda aka deftunix < medda.mauro at gmail dot com >
+
+Inspired by [Anth Courtney](https://github.com/anthcourtney/ansible-role-cis-amazon-linux)
