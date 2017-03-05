@@ -148,3 +148,6 @@
 - include: section01/1.7.2.yml
   when: "'1.7.2' not in cis_level_1_exclusions and cis_apply_level_1_profile"
 
+- include: section01/1.8.yml
+  when: "'1.8' not in cis_level_1_exclusions and cis_apply_level_1_profile"
+
