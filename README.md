@@ -40,7 +40,7 @@ Role Variables
 
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
-| `cis_centos7_*` | `yes` | BLABLABLA |
+| `cis_*` | `yes` | BLABLABLA |
 
 Dependencies
 ------------
@@ -54,7 +54,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: meddam.cis-centos, when: "ansible_distribution" == 'CentOS' and ansible_os_major_verision == 7"}
+         - { role: meddam.ansible_role_cis_centos, when: "ansible_distribution" == 'CentOS' and ansible_os_major_verision == 7"}
 
 License
 -------
