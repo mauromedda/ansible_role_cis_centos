@@ -2,19 +2,6 @@
 # 2.1.5 Ensure time services are not enabled (Scored)
 
 - name: 2.1.5 Ensure time services are not enabled (Scored)
-  shell: chkconfig --list 2>/dev/null| grep time
-  register: chkcfg_svc
-  changed_when: chkcfg_svc.stdout and chkcfg_svc.rc == 0
-  failed_when: chkcfg_svc.rc not in (0, 1)
-  ignore_errors: true
-  tags:
-    - level1
-    - section02
-    - section02_level1
-    - scored
-    - "2.1.5"
-
-- name: 2.1.5 Ensure time services are not enabled (Scored)
   service:
     name: "{{ item }}"
     state: stopped
@@ -22,7 +9,7 @@
   with_items:
     - time-dgram
     - time-stream
-  when: chkcfg_svc.changed
+  when: time_service_status.changed
   tags:
     - level1
     - section02

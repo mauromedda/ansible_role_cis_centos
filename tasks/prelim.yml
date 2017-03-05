@@ -1,12 +1,60 @@
 ---
-- name: "Check for autofs service"
+- name: "PRELIM | Check for autofs service"
   shell: "systemctl show autofs | grep LoadState | cut -d = -f 2"
   register: autofs_service_status
   changed_when: no
   check_mode: no
 
-- name: "Check for xinetd service"
+- name: "PRELIM | Check for xinetd service"
   shell: "systemctl show xinetd | grep LoadState | cut -d = -f 2"
   register: xinetd_service_status
   changed_when: no
   check_mode: no
+
+- name: "PRELIM | Check if chargen service is present"
+  shell: chkconfig --list 2>/dev/null| grep chargen
+  register: chargen_service_status
+  changed_when: chargen_service_status.stdout and chargen_service_status.rc == 0
+  failed_when: chargen_service_status.rc not in (0, 1)
+  check_mode: no
+  ignore_errors: true
+
+- name: "PRELIM | Check if daytime service is present"
+  shell: chkconfig --list 2>/dev/null| grep daytime
+  register: daytime_service_status
+  changed_when: daytime_service_status.stdout and daytime_service_status.rc == 0
+  failed_when: daytime_service_status.rc not in (0, 1)
+  check_mode: no
+  ignore_errors: true
+
+- name: "PRELIM | Check if discard service is present"
+  shell: chkconfig --list 2>/dev/null| grep discard
+  register: discard_service_status
+  changed_when: discard_service_status.stdout and discard_service_status.rc == 0
+  failed_when: discard_service_status.rc not in (0, 1)
+  check_mode: no
+  ignore_errors: true
+
+- name: "PRELIM | Check if echo service is present"
+  shell: chkconfig --list 2>/dev/null| grep echo
+  register: echo_service_status
+  changed_when: echo_service_status.stdout and echo_service_status.rc == 0
+  failed_when: echo_service_status.rc not in (0, 1)
+  check_mode: no
+  ignore_errors: true
+
+- name: "PRELIM | Check if time service is present"
+  shell: chkconfig --list 2>/dev/null| grep time
+  register: time_service_status
+  changed_when: time_service_status.stdout and time_service_status.rc == 0
+  failed_when: time_service_status.rc not in (0, 1)
+  check_mode: no
+  ignore_errors: true
+
+- name: "PRELIM | Check if tftp server is present"
+  shell: chkconfig --list 2>/dev/null| grep tftp
+  register: tftp_service_status
+  changed_when: tftp_service_status.stdout and tftp_service_status.rc == 0
+  failed_when: tftp_service_status.rc not in (0, 1)
+  check_mode: no
+  ignore_errors: true
