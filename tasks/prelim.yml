@@ -58,3 +58,17 @@
   failed_when: tftp_service_status.rc not in (0, 1)
   check_mode: no
   ignore_errors: true
+
+- name: "PRELIM | Check for ntpd service"
+  shell: "systemctl show ntpd | grep LoadState | cut -d = -f 2"
+  register: ntpd_service_status
+  changed_when: no
+  check_mode: no
+  ignore_errors: true
+
+- name: "PRELIM | Check for chronyd service"
+  shell: "systemctl show chronyd | grep LoadState | cut -d = -f 2"
+  register: chronyd_service_status
+  changed_when: no
+  check_mode: no
+  ignore_errors: true

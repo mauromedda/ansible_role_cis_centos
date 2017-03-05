@@ -15,3 +15,10 @@
 
 - name: update gdb
   shell: dconf update
+
+- name: restart ntpd
+  systemd:
+    name: ntpd
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
