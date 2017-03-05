@@ -113,7 +113,20 @@ cis_rsync_server: false
 # 2.2.21
 cis_ntalk_server: false
 
+# 2.3.1
+cis_ypbind_required: false
 
+# 2.3.2
+cis_rsh_required: false
+
+# 2.3.3
+cis_talk_required: false
+
+# 2.3.4
+cis_telnet_required: true
+
+# 2.3.5
+cis_openldap_clients_required: false
 
 
 # 3.4.2

@@ -1,0 +1,14 @@
+---
+# 2.3.2 Ensure rsh client is not installed (Scored)
+
+- name: 2.3.2 Ensure rsh client is not installed (Scored)
+  yum:
+    name: rsh
+    state: absent
+  when: cis_rsh_required == false
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.3.2"
