@@ -60,6 +60,62 @@ cis_time_synchronization_servers:
     - 2.pool.ntp.org
     - 3.pool.ntp.org
 
+
+# 2.2.3
+cis_avahi_server: false
+
+# 2.2.4
+cis_cups_server: false
+
+#2.2.5
+cis_dhcp_server: false
+
+#2.2.6
+cis_ldap_server: false
+
+# 2.2.7
+cis_nfs_server: false
+cis_rpcbind_server: false
+
+# 2.2.8
+cis_named_server: false
+
+# 2.2.9
+cis_ftp_server: false
+
+# 2.2.10
+cis_http_server: false
+
+# 2.2.11
+cis_dovecot_server: false
+
+# 2.2.12
+cis_samba_server: false
+
+# 2.2.13
+cis_squid_server: false
+
+# 2.2.14
+cis_snmp_server: false
+
+# 2.2.15
+cis_mail_server: false
+
+# 2.2.16
+cis_nis_server: false
+
+# 2.2.19
+cis_tftp_server: false
+
+# 2.2.20
+cis_rsync_server: false
+
+# 2.2.21
+cis_ntalk_server: false
+
+
+
+
 # 3.4.2
 cis_hosts_allow_all_ips: "127.0.0.1"
 

@@ -22,3 +22,17 @@
     daemon_reload: yes
     enabled: yes
     state: restarted
+
+- name: restart chronyd
+  systemd:
+    name: chronyd
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+
+- name: restart postfix
+  systemd:
+    name: postfix
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

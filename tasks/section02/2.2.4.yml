@@ -1,0 +1,15 @@
+---
+# 2.2.4 Ensure CUPS is not enabled (Scored)
+
+- name: 2.2.4 Ensure CUPS is not enabled (Scored)
+  systemd:
+    name: cups
+    state: stopped
+    enabled: no
+  when: cis_cups_server == false and cups_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.2.4"

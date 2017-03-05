@@ -28,3 +28,66 @@
 - include: section02/2.2.1.2.yml
   when: "'2.2.1.2' not in cis_level_1_exclusions"
 
+- include: section02/2.2.1.3.yml
+  when: "'2.2.1.3' not in cis_level_1_exclusions"
+
+- include: section02/2.2.2.yml
+  when: "'2.2.2' not in cis_level_1_exclusions"
+
+- include: section02/2.2.3.yml
+  when: "'2.2.3' not in cis_level_1_exclusions"
+
+- include: section02/2.2.4.yml
+  when: "'2.2.4' not in cis_level_1_exclusions"
+
+- include: section02/2.2.5.yml
+  when: "'2.2.5' not in cis_level_1_exclusions"
+
+- include: section02/2.2.6.yml
+  when: "'2.2.6' not in cis_level_1_exclusions"
+
+- include: section02/2.2.7.yml
+  when: "'2.2.7' not in cis_level_1_exclusions"
+
+- include: section02/2.2.8.yml
+  when: "'2.2.8' not in cis_level_1_exclusions"
+
+- include: section02/2.2.9.yml
+  when: "'2.2.9' not in cis_level_1_exclusions"
+
+- include: section02/2.2.10.yml
+  when: "'2.2.10' not in cis_level_1_exclusions"
+
+- include: section02/2.2.11.yml
+  when: "'2.2.11' not in cis_level_1_exclusions"
+
+- include: section02/2.2.12.yml
+  when: "'2.2.12' not in cis_level_1_exclusions"
+
+- include: section02/2.2.13.yml
+  when: "'2.2.13' not in cis_level_1_exclusions"
+
+- include: section02/2.2.14.yml
+  when: "'2.2.14' not in cis_level_1_exclusions"
+
+- include: section02/2.2.15.yml
+  when: "'2.2.15' not in cis_level_1_exclusions"
+
+- include: section02/2.2.16.yml
+  when: "'2.2.16' not in cis_level_1_exclusions"
+
+- include: section02/2.2.17.yml
+  when: "'2.2.17' not in cis_level_1_exclusions"
+
+- include: section02/2.2.18.yml
+  when: "'2.2.18' not in cis_level_1_exclusions"
+
+- include: section02/2.2.19.yml
+  when: "'2.2.19' not in cis_level_1_exclusions"
+
+- include: section02/2.2.20.yml
+  when: "'2.2.20' not in cis_level_1_exclusions"
+
+- include: section02/2.2.21.yml
+  when: "'2.2.21' not in cis_level_1_exclusions"
+

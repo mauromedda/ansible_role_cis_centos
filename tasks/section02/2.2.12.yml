@@ -1,0 +1,15 @@
+---
+# 2.2.12 Ensure Samba is not enabled (Scored)
+
+- name: 2.2.12 Ensure Samba is not enabled (Scored)
+  systemd:
+    name: smb
+    state: stopped
+    enabled: no
+  when: cis_samba_server == false and smb_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.2.12"

@@ -1,0 +1,15 @@
+---
+# 2.2.16 Ensure NIS Server is not enabled (Scored)
+
+- name: 2.2.16 Ensure NIS Server is not enabled (Scored)
+  systemd:
+    name: ypserv
+    state: stopped
+    enabled: no
+  when: cis_nis_server == false and ypserv_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.2.16"

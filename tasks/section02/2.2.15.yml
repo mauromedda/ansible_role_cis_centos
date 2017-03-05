@@ -1,0 +1,16 @@
+---
+# 2.2.15 Ensure mail transfer agent is configured for local-only mode (Scored)
+
+- name: 2.2.15 Ensure mail transfer agent is configured for local-only mode (Scored)
+  lineinfile:
+    dest: /etc/postfix/main.cf
+    regexp: "^(#)?inet_interfaces"
+    line: "inet_interfaces = localhost"
+  when: cis_mail_server == false and postfix_installed.rc == 0
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.2.15"
+  notify: restart postfix

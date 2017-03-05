@@ -1,0 +1,15 @@
+---
+# 2.2.21 Ensure talk server is not enabled (Scored)
+
+- name: 2.2.21 Ensure talk server is not enabled (Scored)
+  systemd:
+    name: ntalk
+    state: stopped
+    enabled: no
+  when: cis_ntalk_server == false and ntalk_service_status.stdout == "loaded"
+  tags:
+    - level1
+    - section02
+    - section02_level1
+    - scored
+    - "2.2.21"
