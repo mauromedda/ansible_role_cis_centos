@@ -1,0 +1,16 @@
+---
+# 1.7.1.1 Ensure message of the day is configured properly (Scored)
+
+- name: 1.7.1.1 Ensure message of the day is configured properly (Scored)
+  template:
+    src: etc/motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - level1
+    - section01
+    - section01_level1
+    - scored
+    - "1.7.1.1"

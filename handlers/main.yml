@@ -12,3 +12,6 @@
 
 - name: generate new grub config
   shell: grub2-mkconfig > /boot/grub2/grub.cfg
+
+- name: update gdb
+  shell: dconf update
