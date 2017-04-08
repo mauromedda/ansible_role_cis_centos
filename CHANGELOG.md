@@ -32,3 +32,4 @@ Sat Apr  8 13:16:59 CEST 2017
 * tasks/sections3/3.5.2.yml. Added.
 * tasks/sections3/3.5.3.yml. Added.
 * tasks/sections3/3.5.4.yml. Added.
+* tasks/sections3/3.6.1.yml. Added.

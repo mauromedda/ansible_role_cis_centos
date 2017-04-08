@@ -67,3 +67,6 @@
 - include: section3/3.5.4.yml
   when: "'3.5.4' not in cis_level_1_exclusions"
 
+- include: section3/3.6.1.yml
+  when: "'3.6.1' not in cis_level_1_exclusions"
+

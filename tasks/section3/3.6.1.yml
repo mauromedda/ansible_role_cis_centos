@@ -1,0 +1,13 @@
+---
+# 3.6.1 Ensure iptables is installed (Scored)
+
+- name: 3.6.1 Ensure iptables is installed (Scored)
+  yum:
+    name: iptables
+    state: present
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.1"
