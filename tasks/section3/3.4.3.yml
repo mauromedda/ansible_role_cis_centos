@@ -1,0 +1,18 @@
+---
+# 3.4.3 Ensure /etc/hosts.deny is configured (Scored)
+
+- name: 3.4.3 Ensure /etc/hosts.deny is configured (Scored)
+  lineinfile:
+     dest: /etc/hosts.deny
+     regexp: "^(#)?ALL"
+     line: "ALL: ALL"
+     owner: root
+     group: root
+     mode: 0644
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.4.3"
+

@@ -132,7 +132,9 @@ cis_openldap_clients_required: false
 cis_hostonly: true
 
 # 3.4.2
-cis_hosts_allow_all_ips: "127.0.0.1"
+cis_hosts_allow_all_ips:
+   - 127.0.0.1/32
+   - 0.0.0.0/0
 
 # 4.2.3
 # You should only enable either rsyslog or syslog-ng, but not both.

@@ -1,0 +1,15 @@
+---
+# 3.4.5 Ensure permissions on /etc/hosts.deny are 644 (Scored)
+
+- name: 3.4.5 Ensure permissions on /etc/hosts.deny are 644 (Scored)
+  file:
+    path: /etc/hosts.deny
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.4.5"

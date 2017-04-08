@@ -1,0 +1,17 @@
+---
+# 3.4.2 Ensure /etc/hosts.allow is configured (Scored)
+
+- name: 3.4.2 Ensure /etc/hosts.allow is configured (Scored)
+  template:
+     src: etc/hosts.allow.j2
+     dest: /etc/hosts.allow
+     owner: root
+     group: root
+     mode: 0644
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.4.2"
+

@@ -1,0 +1,15 @@
+---
+# 3.4.4 Ensure permissions on /etc/hosts.allow are configured (Scored)
+
+- name: 3.4.4 Ensure permissions on /etc/hosts.allow are configured (Scored)
+  file:
+    path: /etc/hosts.allow
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.4.4"

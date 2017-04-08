@@ -1,0 +1,58 @@
+---
+# 3.5.2 Ensure SCTP is disabled (Not Scored)
+
+- name: 3.5.2 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_3_5_1
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.2"
+
+- name: 3.5.2 - Check if SCTP is disabled
+  command: modprobe -n -v sctp
+  register: mod_sctp
+  changed_when: mod_sctp.stdout | search('sctp')
+  check_mode: false
+  failed_when: mod_sctp.rc not in (0,1)
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.2"
+
+- name: 3.5.2 - Check if SCTP is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.2"
+  changed_when: lsmod.stdout | search('sctp')
+
+- name: Unload SCTP if required
+  command: modprobe -r sctp
+  register: mod_sctp_remove
+  changed_when: mod_sctp_remove.rc == 0
+  when: lsmod.stdout | search('sctp.*')
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.2"
+
+- name: 3.5.2 Ensure SCTP is disabled (Not Scored)
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install sctp" 
+    line: "install sctp /bin/true" 
+  when: modprobe_3_5_1.stat.exists is defined and modprobe_3_5_1.stat.exists
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.2"

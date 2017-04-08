@@ -1,0 +1,58 @@
+---
+# 3.5.1 Ensure DCCP is disabled (Not Scored)
+
+- name: 3.5.1 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_3_5_1
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.1"
+
+- name: 3.5.1 - Check if DCCP is disabled
+  command: modprobe -n -v dccp
+  register: mod_dccp
+  changed_when: mod_dccp.stdout | search('dccp')
+  check_mode: false
+  failed_when: mod_dccp.rc not in (0,1)
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.1"
+
+- name: 3.5.1 - Check if DCCP is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.1"
+  changed_when: lsmod.stdout | search('dccp')
+
+- name: Unload DCCP if required
+  command: modprobe -r dccp
+  register: mod_dccp_remove
+  changed_when: mod_dccp_remove.rc == 0
+  when: lsmod.stdout | search('dccp.*')
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.1"
+
+- name: 3.5.1 Ensure DCCP is disabled (Not Scored)
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install dccp" 
+    line: "install dccp /bin/true" 
+  when: modprobe_3_5_1.stat.exists is defined and modprobe_3_5_1.stat.exists
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.5.1"
