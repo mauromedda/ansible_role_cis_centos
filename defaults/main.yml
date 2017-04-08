@@ -136,6 +136,9 @@ cis_hosts_allow_all_ips:
    - 127.0.0.1/32
    - 0.0.0.0/0
 
+# 3.6.2, 3.6.3, 3.6.4, 3.6.5
+cis_firewall_default_policy: true
+
 # 4.2.3
 # You should only enable either rsyslog or syslog-ng, but not both.
 cis_enable_rsyslog: true # Set to true if rsyslog should be enabled/configured.

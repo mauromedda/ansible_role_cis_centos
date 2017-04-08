@@ -3,8 +3,11 @@
 
 - name: 3.6.1 Ensure iptables is installed (Scored)
   yum:
-    name: iptables
+    name: "{{ item }}"
     state: present
+  with_items:
+    - "iptables"
+    - "iptables-services"
   tags:
     - level1
     - level1_section3

@@ -1,0 +1,42 @@
+---
+# 3.6.3 Ensure loopback traffic is configured (Scored)
+
+- name: 3.6.3 Ensure loopback traffic is configured (Scored)
+  iptables:
+    chain: INPUT
+    in_interface: lo0
+    jump: DROP
+  when: cis_firewall_default_policy == true
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+
+- name: 3.6.3 Ensure loopback traffic is configured (Scored)
+  iptables:
+    chain: OUTPUT
+    out_interface: lo0 
+    jump: ACCEPT
+  when: cis_firewall_default_policy == true
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.3"
+
+- name: 3.6.3 Ensure loopback traffic is configured (Scored)
+  iptables:
+    chain: INPUT 
+    source: 127.0.0.0/8
+    jump: DROP
+  when: cis_firewall_default_policy == true
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.3"
+

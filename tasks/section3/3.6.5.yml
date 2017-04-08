@@ -1,0 +1,13 @@
+---
+# 3.6.5 Ensure firewall rules exist for all open ports
+
+- name: 3.6.5 - Ensure firewall rules exist for all open ports
+  debug:
+    msg: "WARNING - This check has not been implemented yet."
+  when: cis_firewall_default_policy == true
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.5"

@@ -200,6 +200,13 @@
   check_mode: no
   ignore_errors: true
 
+- name: "PRELIM | Check for firewalld service"
+  shell: "systemctl show firewalld | grep LoadState | cut -d = -f 2"
+  register: firewalld_service_status
+  changed_when: no
+  check_mode: no
+  ignore_errors: true
+
 - name: "PRELIM | Check for rsyncd service"
   shell: "systemctl show rsyncd | grep LoadState | cut -d = -f 2"
   register: rsyncd_service_status

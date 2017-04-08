@@ -36,3 +36,10 @@
     daemon_reload: yes
     enabled: yes
     state: restarted
+
+- name: restart iptables
+  systemd:
+    name: iptables
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

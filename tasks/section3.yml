@@ -70,3 +70,14 @@
 - include: section3/3.6.1.yml
   when: "'3.6.1' not in cis_level_1_exclusions"
 
+- include: section3/3.6.2.yml
+  when: "'3.6.2' not in cis_level_1_exclusions"
+
+- include: section3/3.6.3.yml
+  when: "'3.6.3' not in cis_level_1_exclusions"
+
+- include: section3/3.6.5.yml
+  when: "'3.6.5' not in cis_level_1_exclusions"
+
+- include: section3/3.6.7.yml
+  when: "'3.6.7' not in cis_level_1_exclusions"

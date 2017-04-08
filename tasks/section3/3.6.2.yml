@@ -1,0 +1,134 @@
+---
+# 3.6.2 Ensure default deny firewall policy
+
+- name: 3.6.2 Disable firewalld
+  systemd:
+    name: firewalld.service
+    state: stopped
+    enabled: no
+    masked: yes
+  when: firewalld_service_status.stdout == "loaded" and
+        cis_firewall_default_policy == true
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+
+- name: 3.6.2 Set default policy to ACCEPT
+  command: /sbin/iptables -P {{ item }} ACCEPT
+  when: firewalld_service_status.stdout == "loaded" and
+        cis_firewall_default_policy == true
+  with_items:
+    - INPUT
+    - OUTPUT
+    - FORWARD
+  register: accept
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+    - "3.6.4"
+
+- name: 3.6.2 CleanUP iptables configuration
+  command: /sbin/iptables "{{ item }}"
+  with_items:
+    - "--flush"
+    - "--delete-chain"
+    - "--zero"
+  when: cis_firewall_default_policy == true and accept|changed
+  register: flush
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+
+- name: 3.6.2 Enable SSH access
+  iptables:
+     chain: INPUT
+     ctstate: NEW
+     destination_port: 22
+     protocol: tcp
+     jump: ACCEPT
+  when: cis_firewall_default_policy == true and flush|changed
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+
+- name: 3.6.4 Ensure outbound and established connections are configured (Not Scored)
+  iptables:
+     chain: INPUT
+     ctstate: ESTABLISHED,RELATED
+     jump: ACCEPT
+  when: cis_firewall_default_policy == true and flush|changed
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.4"
+    - "3.6.2"
+
+- name:  3.6.4 Ensure outbound and established connections are configured (Not Scored)
+  iptables:
+     chain: OUTPUT
+     ctstate: NEW,ESTABLISHED
+     jump: ACCEPT
+  when: cis_firewall_default_policy == true and flush|changed
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.4"
+    - "3.6.2"
+
+- name: 3.6.2 Ensure default deny firewall policy (Scored)
+  command: /sbin/iptables -P {{ item }} DROP
+  when: cis_firewall_default_policy == true and flush|changed
+  with_items:
+    - INPUT
+    - OUTPUT
+    - FORWARD
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+    - "3.6.4"
+  register: fw
+
+- name: 3.6.2 Save configuration
+  shell: /sbin/iptables-save > /etc/sysconfig/iptables
+  notify: restart iptables
+  when: fw | changed
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+    - "3.6.4"
+
+- name: 3.6.2 Enabled and start iptables
+  systemd:
+    name: iptables.service
+    state: restarted
+    enabled: yes
+  when: fw | changed
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - scored
+    - "3.6.2"
+    - "3.6.4"
