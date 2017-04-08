@@ -128,6 +128,8 @@ cis_telnet_required: true
 # 2.3.5
 cis_openldap_clients_required: false
 
+# 3.1.1
+cis_hostonly: true
 
 # 3.4.2
 cis_hosts_allow_all_ips: "127.0.0.1"

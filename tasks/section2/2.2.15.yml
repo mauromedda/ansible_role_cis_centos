@@ -6,7 +6,7 @@
     dest: /etc/postfix/main.cf
     regexp: "^(#)?inet_interfaces"
     line: "inet_interfaces = localhost"
-  when: cis_mail_server == false and postfix_installed.rc == 0
+  when: cis_mail_server == false and postfix_installed.results[1].yumstate == 'installed'
   tags:
     - level1
     - section2

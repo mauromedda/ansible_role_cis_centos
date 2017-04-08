@@ -1,0 +1,20 @@
+---
+# 3.2.4 Ensure suspicious packets are logged (Scored)
+
+- name: 3.2.4 Ensure suspicious packets are logged (Scored)
+  sysctl:
+    name: "{{ item }}"
+    value: 1
+    state: present
+    reload: yes
+    sysctl_set: yes
+    ignoreerrors: yes
+  with_items:
+    - net.ipv4.conf.all.log_martians
+    - net.ipv4.conf.default.log_martians
+  tags:
+    - level1
+    - section3
+    - section3_level1
+    - scored
+    - "3.2.4"

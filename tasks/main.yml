@@ -16,3 +16,7 @@
 - include: "section2.yml"
   become: yes
   when: cis_section2
+
+- include: "section3.yml"
+  become: yes
+  when: cis_section3

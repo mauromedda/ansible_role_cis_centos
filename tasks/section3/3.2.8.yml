@@ -1,0 +1,17 @@
+---
+# 3.2.8 Ensure TCP SYN Cookies is enabled (Scored)
+
+- name: 3.2.8 Ensure TCP SYN Cookies is enabled (Scored)
+  sysctl:
+    name: net.ipv4.tcp_syncookies
+    value: 1
+    state: present
+    reload: yes
+    sysctl_set: yes
+    ignoreerrors: yes
+  tags:
+    - level1
+    - section3
+    - section3_level1
+    - scored
+    - "3.2.8"

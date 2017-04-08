@@ -1,0 +1,20 @@
+---
+# 3.2.7 Ensure Reverse Path Filtering is enabled (Scored)
+
+- name: 3.2.7 Ensure Reverse Path Filtering is enabled (Scored)
+  sysctl:
+    name: "{{ item }}"
+    value: 1
+    state: present
+    reload: yes
+    sysctl_set: yes
+    ignoreerrors: yes
+  with_items:
+    - net.ipv4.conf.all.rp_filter
+    - net.ipv4.conf.default.rp_filter
+  tags:
+    - level1
+    - section3
+    - section3_level1
+    - scored
+    - "3.2.7"

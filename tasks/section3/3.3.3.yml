@@ -1,0 +1,58 @@
+---
+# 3.3.3 Ensure IPv6 is disabled (Not Scored)
+
+- name: 3.3.3 - Check if CIS modprobe configuration exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_3_3_3
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.3.3"
+
+- name: 3.3.3 - Check if IPv6 is disabled
+  command: modprobe -n -v ipv6
+  register: mod_ipv6
+  changed_when: mod_ipv6.stdout | search('ipv6')
+  check_mode: false
+  failed_when: mod_ipv6.rc not in (0,1)
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.3.3"
+
+- name: 3.3.3 - Check if IPv6 is loaded
+  command: lsmod
+  check_mode: false
+  register: lsmod
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.3.3"
+  changed_when: lsmod.stdout | search('ipv6')
+
+- name: Unload IPv6 if required
+  command: modprobe -r ipv6
+  register: mod_ipv6_remove
+  changed_when: mod_ipv6_remove.rc == 0
+  when: lsmod.stdout | search('ipv6.*')
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.3.3"
+
+- name: 3.3.3 Ensure IPv6 is disabled (Not Scored)
+  lineinfile: 
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install ipv6" 
+    line: "install ipv6 /bin/true" 
+  when: modprobe_3_3_3.stat.exists is defined and modprobe_3_3_3.stat.exists
+  tags:
+    - level1
+    - level1_section3
+    - section3
+    - "3.3.3"

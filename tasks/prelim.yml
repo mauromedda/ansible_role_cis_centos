@@ -215,9 +215,10 @@
   ignore_errors: true
 
 - name: "PRELIM | Check if postfix package is installed"
-  command: rpm -q postfix
-  register: postfix_installed
+  yum: list=postfix
   changed_when: no
   failed_when: no
   check_mode: no
   ignore_errors: true
+  register: postfix_installed
+  
