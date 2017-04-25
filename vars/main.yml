@@ -6,6 +6,7 @@
 cis_target_os_distribution: "CentOS"
 cis_target_os_versions: 
   - "7.3.1611"
+  - "7.2.1511"
 
 cis_modprobe_conf_filename: "/etc/modprobe.d/CIS.conf"
 cis_aide_database_filename: "/var/lib/aide/aide.db.gz"

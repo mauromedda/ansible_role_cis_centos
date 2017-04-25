@@ -1,0 +1,14 @@
+---
+# 4.1.2 Ensure auditd service is enabled (Scored)
+
+- name: 4.1.2 Ensure auditd service is enabled (Scored)
+  systemd:
+    name: auditd
+    state: started
+    enabled: yes
+  tags:
+     - section4
+     - level2
+     - section4_level2
+     - "4.1.2"
+     - "scored"
